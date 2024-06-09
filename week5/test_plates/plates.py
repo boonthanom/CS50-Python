@@ -1,38 +1,35 @@
 def main():
     plate = input("Plate: ")
-    if is_valid(plate):
-        print("Valid")
-    else:
-        print("Invalid")
+    print(is_valid(plate))
 
 
 def is_valid(s):
-    if s[0:2].isalpha() and 1 < len(s) < 7 and s.isalnum():
-        temp = 0
-        flag = 1
-        firstzero = 0
-        if len(s) > 3:
-            for i in range(
-                3
-            ):  # checking from the last to see if any number comes before an alphabet
-                if s[(len(s) - 1) - i].isalpha():
-                    if s[(len(s) - i - 1) - 1].isnumeric():
-                        temp += 1
-            if temp > 0:  # means that numbers came in the middle of the plate
-                flag = 0
-        else:
-            temp = 0
-        if temp == 0:  # to check if the first number is a zero
-            for j in range(len(s) - 1):
-                if s[j].isalpha():
-                    if s[j + 1] == "0":
-                        firstzero = 1
-        if flag == 1 and firstzero == 0:
-            return True
-        else:
-            return False
+    if (starts_with_two_letters(s) and max_6_characters(s) and numbers_at_end(s) and last_check(s)):
+        return True
     else:
         return False
+
+
+# starts with atleast two letters
+def starts_with_two_letters(text):
+    return text[0:2].isalpha()
+
+# maximum of 6 characters and a minimum of 2 characters.
+
+
+def max_6_characters(text):
+    return 2 <= len(text) <= 6
+
+
+# numebers must be at the very end. The first number used cannot be a 0
+def numbers_at_end(text):
+    return (text[-2:].isnumeric() or text[-2:].isalpha()) and (True if text.find("0") == -1 else text[text.find("0")-1].isalpha() == False)
+
+# ensure no periods, spaces, or punctuation marks are used
+
+
+def last_check(text):
+    return text.strip() == text and (text.find(",") == -1 and text.find("'") == -1) and text.find(".") == -1
 
 
 if __name__ == "__main__":

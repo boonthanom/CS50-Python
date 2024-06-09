@@ -1,36 +1,32 @@
 def main():
-    while True:
-        try:
-            f = input("Fraction: ")
-            x = convert(f)
-        except (ValueError, ZeroDivisionError):
-            pass
-        else:
-            break
-    p = gauge(x)
-    print(f"{p}")
+    fraction = input("Fraction: ")
+    percentage = convert(fraction)
+    print (gauge(percentage))
 
 
-def convert(f):
-    x, y = f.split("/")
-    if int(y) == 0: # should check for this ZeroDivisionError first since x > y will always be true for y = 0
+def convert(fraction):
+    # expects a str in X/Y format as input
+    x, y = fraction.split("/")
+
+    if y == "0":
         raise ZeroDivisionError
-    elif x.isdigit() is False or y.isdigit() is False:
+    if not x.isnumeric() or not y.isnumeric():
         raise ValueError
-    elif int(x) > int(y):
+    if (int(x) > int(y)):
         raise ValueError
-    else:
-        return round(int(x) / int(y) * 100)
+
+    x = int(x)
+    y = int(y)
+    return (round((x/y)*100))
 
 
-def gauge(percent):
-    if percent >= 99:
-        return "F"
-    elif percent <= 1:
+def gauge(percentage):
+    if (percentage <= 1):
         return "E"
+    elif (percentage >= 99):
+        return "F"
     else:
-        return f"{percent}%"
-
+        return F"{percentage}%"
 
 if __name__ == "__main__":
     main()

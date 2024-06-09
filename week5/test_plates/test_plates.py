@@ -1,31 +1,50 @@
 from plates import is_valid
 
-def test_normal():
-    assert is_valid("IN1947") == True
-    assert is_valid("mbappe") == True
+def test_only_letters():
+    assert is_valid("HAMMAD") == True
+    assert is_valid("Outlas") == True
+    assert is_valid("hello world") == False
+    assert is_valid("a") == False
 
-def test_length():
-    assert is_valid("NeverGonnaGiveYouUp") == False
-    assert is_valid("x") == False
 
-def test_num_in_middle():
-    assert is_valid("ab69cd") == False
+def test_only_numbers():
+    assert is_valid("7.866") == False
+    assert is_valid("3.14") == False
+    assert is_valid("3") == False
+    assert is_valid("23") == False
+    assert is_valid("123456") == False
+    assert is_valid("22") == False
+    assert is_valid(" 2") == False
+
+
+def test_both():
+    assert is_valid("CS50") == True
+    assert is_valid("CS05") == False
+    assert is_valid("cs01") == False
+    assert is_valid("c6") == False
+    assert is_valid("cs") == True
+    assert is_valid("abc10") == True
+    assert is_valid("000") == False
+    assert is_valid("cs50asdaa") == False
     assert is_valid("cs50p") == False
 
-def test_first_num_zero():
-    assert is_valid("ab0123") == False
-    assert is_valid("xy420z") == False
+    assert is_valid("AA") == True
+    assert is_valid("A2") == False
+    assert is_valid("1a") == False
+    assert is_valid("c2") == False
+    assert is_valid("1z") == False
+    assert is_valid("2A") == False
+    assert is_valid("3x") == False
+    assert is_valid("zu#kk") == False
 
-def test_no_punctuation():
-    assert is_valid("xx,.&!") == False
-    assert is_valid("xx <42>") == False
 
-def test_first_two_alpha():
-    assert is_valid("07bond") == False
-    assert is_valid("r0han") == False
-    assert is_valid("rr") == True
-    assert is_valid("8055") == False
 
-def test_Captital():
-    assert is_valid("IAMGROOT") == False
-    assert is_valid("CS1337") == True
+def comma():
+    assert is_valid("Ham,s") == False
+    assert is_valid("J:d,s") == False
+    assert is_valid(",.,a") == False
+    assert is_valid(" ") == False
+    assert is_valid("      ") == False
+    assert is_valid("What's up, eh?") == False
+    assert is_valid("vs,20?") == False
+

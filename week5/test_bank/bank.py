@@ -1,17 +1,18 @@
 def main():
-    g = input("Greeting : ").strip()
-    v = value(g)
-    print(f"${v}")
+    greeting = input("Greeting: ")
+    print(value(greeting))
 
 
 def value(greeting):
     greeting = greeting.lower()
-    if greeting.startswith("hello"):
-        return 0
-    elif "h" == greeting[0]:
+    if (greeting.startswith("h")):
+        if greeting.startswith("hello"):
+            return 0
         return 20
     else:
         return 100
+
+
 
 
 if __name__ == "__main__":
